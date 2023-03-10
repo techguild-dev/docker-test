@@ -1,0 +1,2 @@
+890  docker-compose up 
+891  docker-compose run app ←（appはymlファイルのとこに定義した名前）
