@@ -1,11 +1,27 @@
+#version：docker-composeファイルのバージョンを指定
 version: "3"
+#services：docker-composeファイルで使用するすべてのサービスを定義 ここではappが名前
 services:
   app:
+    #container_name：Dockerコンテナの名前を指定
     container_name: docker_test_go
+
+    #build：Dockerfileをビルドするために使用するコンテキストとDockerfileファイルを指定
     build:
+      #context：docker build コマンドを実行するときに、Dockerfile で指定されたファイルやディレクトリのルートとなるディレクトリを指定するためのオプション
       context: .
       dockerfile: Dockerfile
+
+    #ports：Dockerコンテナが使用するポートを指定。左側のポート（8085）はホストマシンのポートであり、右側のポート（8085）はDockerコンテナのポート。
     ports:
       - "8085:8085"
+    
+    #volumes：Dockerコンテナとホストマシンのファイル共有を設定。. はカレントディレクトリを表し、/app はDockerコンテナ内のファイルのパス。
     volumes:
       - .:/app
+      
+    # tty オプションを無効にした場合、コンテナ内で実行されるコマンドは標準入力を受け取らず、コンテナ内の処理が進まなくなる
+    tty:
+      true
+
+   
